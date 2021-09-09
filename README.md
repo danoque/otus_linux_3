@@ -184,5 +184,8 @@ mount /home
 ![Image alt](https://github.com/danoque/otus_linux_3/raw/main/11.png)
 
 После выхода и перезагрузки проверим, что все действия выполнены корректно
- ```lsblk```
+
+ ```
+ lsblk
+ ```
 ![Image alt](https://github.com/danoque/otus_linux_3/raw/main/12.png)
