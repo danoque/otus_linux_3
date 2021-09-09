@@ -41,7 +41,7 @@ lvcreate -n lv_root -l +100%FREE /dev/vg_root
 mkfs.xfs /dev/vg_root/lv_root
 mount /dev/vg_root/lv_root /mnt
 ```
-![Image alt](https://github.com/danoque/otus_linux_3/raw/master/1.png)
+![Image alt](https://github.com/danoque/otus_linux_3/blob/master/1.png?raw=true)
 
 Следующей командой сдампим все данные с / раздела в /mnt:
 ```
