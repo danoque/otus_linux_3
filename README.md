@@ -41,7 +41,7 @@ lvcreate -n lv_root -l +100%FREE /dev/vg_root
 mkfs.xfs /dev/vg_root/lv_root
 mount /dev/vg_root/lv_root /mnt
 ```
-![Image alt](https://github.com/danoque/linux_otus_3/1.png)
+![Image alt](https://github.com/danoque/otus_linux_3/1.png)
 Следующей командой сдампим все данные с / раздела в /mnt:
 ```
 xfsdump -J - /dev/VolGroup00/LogVol00 | xfsrestore -J - /mnt
@@ -61,24 +61,24 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 ```
 cd /boot ; for i in `ls initramfs-*img`; do dracut -v $i `echo $i|sed "s/initramfs-//g; s/.img//g"` --force; done
 ```
-![Image alt](https://github.com/danoque/otus_3/2.png)
+![Image alt](https://github.com/danoque/otus_linux_3/2.png)
 
 Чтобы при загрузке был смонтирован нужный root: в файле /boot/grub2/grub.cfg заменим rd.lvm.lv=VolGroup00/LogVol00 на rd.lvm.lv=vg_root/lv_root(Скриншот №3). 
 ```
 nano /etc/default/grub
 ```
-![Image alt](https://github.com/danoque/linux_otus_3/3.png)
+![Image alt](https://github.com/danoque/otus_linux_3/3.png)
 После изменений производим обновление grub(Скриншот №4):
 ```
 grub2-mkconfig -o /boot/grub2/grub.cfg
 ```
-![Image alt](https://github.com/danoque/linux_otus_3/4.png)
+![Image alt](https://github.com/danoque/otus_linux_3/4.png)
 
 Выполним перезагрузку системы. После подключения vagrant ssh проверим, что новый root том успешно загружен(Скриншот №5):
 ```
 lsblk
 ```
-![Image alt](https://github.com/danoque/linux_otus_3/5.png)
+![Image alt](https://github.com/danoque/otus_linux_3/5.png)
 
 Теперь изменим размер старой VG и вернём на него root. Для этого удалим старый LV размером 40G и создим новый на 8G:
 ```
@@ -89,13 +89,13 @@ lvcreate -n VolGroup00/LogVol00 -L 8G /dev/VolGroup00
 ```
 mkfs.xfs /dev/VolGroup00/LogVol00
 ```
-![Image alt](https://github.com/danoque/linux_otus_3/6.png)
+![Image alt](https://github.com/danoque/otus_linux_3/6.png)
 Смонтируем файловую систему и скопируем данные:
 ```
 mount /dev/VolGroup00/LogVol00 /mnt
 xfsdump -J - /dev/vg_root/lv_root | xfsrestore -J - /mnt
 ```
-![Image alt](https://github.com/danoque/linux_otus_3/7.png)
+![Image alt](https://github.com/danoque/otus_linux_3/7.png)
 
 Выполним переконфигурацию grub, за исключением правки /etc/grub2/grub.cfg
 ```
@@ -104,7 +104,7 @@ chroot /mnt/
 grub2-mkconfig -o /boot/grub2/grub.cfg
 cd /boot ; for i in `ls initramfs-*img`; do dracut -v $i `echo $i|sed "s/initramfs-//g; s/.img//g"` --force; done
 ```
-![Image alt](https://github.com/Edo1993/linux_otus_3/8.png)
+![Image alt](https://github.com/Edo1993/otus_linux_3/8.png)
 Отложим перезагрузку и выход из под chroot до момента перенеса /var.
 Сделаем зеркало из свободных дисков:
 ```
@@ -140,8 +140,8 @@ vim /etc/default/grub
 ```
 grub2-mkconfig -o /boot/grub2/grub.cfg
 ```
-![Image alt](https://github.com/Edo1993/linux_otus_3/91.png)
-![Image alt](https://github.com/Edo1993/linux_otus_3/92.png)
+![Image alt](https://github.com/Edo1993/otus_linux_3/91.png)
+![Image alt](https://github.com/Edo1993/otus_linux_3/92.png)
 
 Перезагрузимся в новый (уменьшенный root) и удалим временную Volume Group:
 ```
@@ -180,8 +180,8 @@ rm -f /home/file{11..20}
 lvconvert --merge /dev/VolGroup00/home_snap
 mount /home
 ```
-![Image alt](https://github.com/danoque/linux_otus_3/11.png)
+![Image alt](https://github.com/danoque/otus_linux_3/11.png)
 
 После выхода и перезагрузки проверим, что все действия выполнены корректно
  ```lsblk```
-![Image alt](https://github.com/Edo1993/linux_otus_3/12.png)
+![Image alt](https://github.com/Edo1993/otus_linux_3/12.png)
