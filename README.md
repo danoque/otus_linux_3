@@ -91,7 +91,9 @@ lvcreate -n VolGroup00/LogVol00 -L 8G /dev/VolGroup00
 mkfs.xfs /dev/VolGroup00/LogVol00
 ```
 ![Image alt](https://github.com/danoque/otus_linux_3/raw/main/6.png)
+
 Смонтируем файловую систему и скопируем данные:
+
 ```
 mount /dev/VolGroup00/LogVol00 /mnt
 xfsdump -J - /dev/vg_root/lv_root | xfsrestore -J - /mnt
