@@ -41,6 +41,16 @@ lvcreate -n lv_root -l +100%FREE /dev/vg_root
 mkfs.xfs /dev/vg_root/lv_root
 mount /dev/vg_root/lv_root /mnt
 ```
+
+![Иллюстрация к проекту](https://github.com/jon/coolproject/raw/master/image/image.png)
+
+![Image alt](https://github.com/{username}/{repository}/raw/{branch}/{path}/image.png)
+![Image alt](https://github.com/danoque/otus_linux_3/raw/main/1.png)
+
+{username} — ваш ник на ГитХабе;
+{repository} — репозиторий где хранятся картинки;
+{branch} — ветка репозитория;
+{path} — путь к месту нахождения картинки.
 ![Image alt](https://github.com/danoque/otus_linux_3/blob/master/1.png?raw=true)
 
 Следующей командой сдампим все данные с / раздела в /mnt:
