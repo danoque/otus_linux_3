@@ -43,12 +43,6 @@ mount /dev/vg_root/lv_root /mnt
 ```
 ![Image alt](https://github.com/danoque/otus_linux_3/raw/main/1.png)
 
-{username} — ваш ник на ГитХабе;
-{repository} — репозиторий где хранятся картинки;
-{branch} — ветка репозитория;
-{path} — путь к месту нахождения картинки.
-![Image alt](https://github.com/danoque/otus_linux_3/blob/master/1.png?raw=true)
-
 Следующей командой сдампим все данные с / раздела в /mnt:
 ```
 xfsdump -J - /dev/VolGroup00/LogVol00 | xfsrestore -J - /mnt
